@@ -54,7 +54,20 @@ class _ImageBlurPageState extends State<ImageBlurPage> {
     if (shader == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
-      return CustomPaint(painter: ImagePainter(shader!, [delta], [image]));
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+        ),
+        extendBodyBehindAppBar: true,
+        body: SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: CustomPaint(
+            painter: ImagePainter(shader!, [delta], [image]),
+          ),
+        ),
+      );
     }
   }
 }
