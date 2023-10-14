@@ -33,6 +33,23 @@ class _GeneralShaderPageState extends State<GeneralShaderPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      extendBodyBehindAppBar: true,
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: _body(),
+      ),
+    );
+  }
+
+  Widget _body() {
     if (shader == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
