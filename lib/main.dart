@@ -1,4 +1,4 @@
-import 'package:basic_shaders/image_blur_page.dart';
+import 'package:basic_shaders/image_shader/image_blur_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

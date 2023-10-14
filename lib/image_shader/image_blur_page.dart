@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'dart:ui' as ui;
 
 import 'package:basic_shaders/config/assets.dart';
-import 'package:basic_shaders/image_painter.dart';
+import 'package:basic_shaders/image_shader/image_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

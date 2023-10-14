@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:basic_shaders/water_ripple_painter.dart';
+import 'package:basic_shaders/general_shader/water_ripple_painter.dart';
 import 'package:flutter/material.dart';
 
 class ShaderHomePage extends StatefulWidget {
