@@ -9,6 +9,7 @@ class Assets {
 
 //#region shaders
   static const String imageBlur = '$_shadersPath/image_blur.frag';
+  static const String artFractal = '$_shadersPath/art_fractal.frag';
 
 //#endregion
 }
