@@ -13,10 +13,10 @@ void main(void) {
     iResolution = uSize;
     vec2 fragCoord = FlutterFragCoord();
 
-    vec2 center = fragCoord/iResolution.xy - vec2(0.5, 0.5);
+    vec2 center = fragCoord / iResolution.xy - vec2(0.5, 0.5);
 
     float dist = length(center);
-    float p = (atan(center.y,center.x)) / (2.0 * PI);
+    float p = (atan(center.y, center.x)) / (2.0 * PI);
     float numStripes = 12.0;
 
     bool stripeA = mod(floor((p * numStripes) + (sin(dist * 10.0 + sin(iTime)))), 2.0) == 1.0;
@@ -41,5 +41,5 @@ void main(void) {
         col = vec3(0.7);
     }
 
-    fragColor = vec4(col,1.0);
+    fragColor = vec4(col, 1.0);
 }

@@ -18,7 +18,7 @@ class ImagePainter extends CustomPainter {
     }
     shader.setFloat(0, size.width);
     shader.setFloat(1, size.height);
-    for(int i = 0; i < uniforms.length; i++) {
+    for (int i = 0; i < uniforms.length; i++) {
       shader.setFloat(i + 2, uniforms[i]);
     }
 
@@ -29,5 +29,7 @@ class ImagePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return oldDelegate != this;
+  }
 }
