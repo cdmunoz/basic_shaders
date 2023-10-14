@@ -46,6 +46,9 @@ class _ImageShaderPageState extends State<ImageShaderPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),

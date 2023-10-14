@@ -57,10 +57,10 @@ flutter:
   shaders:
     - shaders/art_fractal.frag
     - shaders/image_blur.frag
-    #- shaders/lsd_effect.frag
-    #- shaders/the_clouds.frag
+    - shaders/lsd_effect.frag
+    - shaders/the_clouds.frag
     #- shaders/the_monster.frag
-    #- shaders/water_ripple.vert
+    - shaders/water_ripple.frag
 
   uses-material-design: true
 

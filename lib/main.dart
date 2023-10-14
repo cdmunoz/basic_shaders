@@ -36,45 +36,79 @@ class HomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: SingleChildScrollView(
-          child: Row(children: [
-            Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const ImageShaderPage(
-                            shaderPath: Assets.imageBlur,
-                            imagePath: Assets.forest,
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  child: const Text('Image Drop Blur'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const GeneralShaderPage(
-                            shaderPath: Assets.artFractal,
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  child: const Text('Art Fractal'),
-                ),
-              ],
-            )
-          ]),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _navigateToGeneral(context, Assets.artFractal);
+                    },
+                    child: const Text('Art Fractal'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _navigateToImage(
+                        context,
+                        Assets.imageBlur,
+                        Assets.forest,
+                      );
+                    },
+                    child: const Text('Image Drop Blur'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _navigateToGeneral(context, Assets.lsdEffect);
+                    },
+                    child: const Text('LSD Effect'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _navigateToGeneral(context, Assets.theClouds);
+                    },
+                    child: const Text('The Clouds'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _navigateToGeneral(context, Assets.waterRipple);
+                    },
+                    child: const Text('Water Ripple'),
+                  ),
+                ],
+              )
+            ]),
+          ),
         ),
+      ),
+    );
+  }
+
+  void _navigateToGeneral(BuildContext context, String shaderPath) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return GeneralShaderPage(shaderPath: shaderPath);
+        },
+      ),
+    );
+  }
+
+  void _navigateToImage(
+    BuildContext context,
+    String shaderPath,
+    String imagePath,
+  ) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return ImageShaderPage(
+            shaderPath: shaderPath,
+            imagePath: imagePath,
+          );
+        },
       ),
     );
   }

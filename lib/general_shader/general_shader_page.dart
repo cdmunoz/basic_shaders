@@ -38,6 +38,9 @@ class _GeneralShaderPageState extends State<GeneralShaderPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
