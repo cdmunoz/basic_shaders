@@ -1,5 +1,4 @@
 import 'package:basic_shaders/image_blur_page.dart';
-import 'package:basic_shaders/shader_home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +19,44 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: const ShaderHomePage(),
-      home: const ImageBlurPage(),
+      //home: const ImageBlurPage(),
+      home: const HomePage(),
     );
   }
 }
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Some Shaders'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: SingleChildScrollView(
+          child: Row(children: [
+            Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ImageBlurPage(),
+                      ),
+                    );
+                  },
+                  child: const Text('Image Blur'),
+                ),
+              ],
+            )
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
