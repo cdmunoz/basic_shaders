@@ -18,7 +18,7 @@ float remap(float v, float inMin, float inMax, float outMin, float outMax) {
 void main() {
     vec2 iResolution = uSize;
     vec2 fragCoord = FlutterFragCoord();
-    vec2 uv = fragCoord/iResolution.xy;
+    vec2 uv = fragCoord / iResolution.xy;
 
     // Vignette
     vec3 col = texture(image, uv).xyz;

@@ -1,4 +1,5 @@
-import 'package:basic_shaders/image_blur_page.dart';
+import 'package:basic_shaders/general_shader/general_shader_page.dart';
+import 'package:basic_shaders/image_shader/image_blur_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,8 +19,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      //home: const ShaderHomePage(),
-      //home: const ImageBlurPage(),
       home: const HomePage(),
     );
   }
@@ -51,6 +50,17 @@ class HomePage extends StatelessWidget {
                   },
                   child: const Text('Image Blur'),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const GeneralShaderPage(),
+                      ),
+                    );
+                  },
+                  child: const Text('Art Fractal'),
+                ),
               ],
             )
           ]),
@@ -59,4 +69,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

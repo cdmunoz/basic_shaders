@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class WaterRipplePainter extends CustomPainter {
+class GeneralPainter extends CustomPainter {
   final FragmentShader shader;
   final double time;
 
-  WaterRipplePainter(FragmentShader fragmentShader, this.time)
+  GeneralPainter(FragmentShader fragmentShader, this.time)
       : shader = fragmentShader;
 
   @override
@@ -20,5 +20,7 @@ class WaterRipplePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return oldDelegate != this;
+  }
 }

@@ -55,7 +55,7 @@ flutter:
   assets:
     - assets/images/
   shaders:
-    #- shaders/art_fractal.frag
+    - shaders/art_fractal.frag
     - shaders/image_blur.frag
     #- shaders/lsd_effect.frag
     #- shaders/the_clouds.frag
