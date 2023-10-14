@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:basic_shaders/config/assets.dart';
 import 'package:basic_shaders/general_shader/general_painter.dart';
 import 'package:flutter/material.dart';
 
 class GeneralShaderPage extends StatefulWidget {
-  const GeneralShaderPage({super.key});
+  const GeneralShaderPage({super.key, required this.shaderPath});
+
+  final String shaderPath;
 
   @override
   State<GeneralShaderPage> createState() => _GeneralShaderPageState();
@@ -58,7 +59,7 @@ class _GeneralShaderPageState extends State<GeneralShaderPage> {
   }
 
   void _loadShader() async {
-    var program = await FragmentProgram.fromAsset(Assets.artFractal);
+    var program = await FragmentProgram.fromAsset(widget.shaderPath);
     shader = program.fragmentShader();
     setState(() {
       // trigger a repaint

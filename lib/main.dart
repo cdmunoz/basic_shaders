@@ -1,5 +1,6 @@
+import 'package:basic_shaders/config/assets.dart';
 import 'package:basic_shaders/general_shader/general_shader_page.dart';
-import 'package:basic_shaders/image_shader/image_blur_page.dart';
+import 'package:basic_shaders/image_shader/image_shader_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,18 +45,27 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ImageBlurPage(),
+                        builder: (context) {
+                          return const ImageShaderPage(
+                            shaderPath: Assets.imageBlur,
+                            imagePath: Assets.forest,
+                          );
+                        },
                       ),
                     );
                   },
-                  child: const Text('Image Blur'),
+                  child: const Text('Image Drop Blur'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const GeneralShaderPage(),
+                        builder: (context) {
+                          return const GeneralShaderPage(
+                            shaderPath: Assets.artFractal,
+                          );
+                        },
                       ),
                     );
                   },

@@ -2,19 +2,25 @@ import 'dart:async';
 import 'dart:ui';
 import 'dart:ui' as ui;
 
-import 'package:basic_shaders/config/assets.dart';
 import 'package:basic_shaders/image_shader/image_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ImageBlurPage extends StatefulWidget {
-  const ImageBlurPage({super.key});
+class ImageShaderPage extends StatefulWidget {
+  const ImageShaderPage({
+    super.key,
+    required this.shaderPath,
+    required this.imagePath,
+  });
+
+  final String shaderPath;
+  final String imagePath;
 
   @override
-  State<ImageBlurPage> createState() => _ImageBlurPageState();
+  State<ImageShaderPage> createState() => _ImageShaderPageState();
 }
 
-class _ImageBlurPageState extends State<ImageBlurPage> {
+class _ImageShaderPageState extends State<ImageShaderPage> {
   late Timer timer;
   double delta = 0;
   FragmentShader? shader;
@@ -61,10 +67,10 @@ class _ImageBlurPageState extends State<ImageBlurPage> {
   }
 
   Future<void> _loadShader() async {
-    final imageData = await rootBundle.load(Assets.forest);
+    final imageData = await rootBundle.load(widget.imagePath);
     image = await decodeImageFromList(imageData.buffer.asUint8List());
 
-    final program = await FragmentProgram.fromAsset(Assets.imageBlur);
+    final program = await FragmentProgram.fromAsset(widget.shaderPath);
     shader = program.fragmentShader();
     setState(() {
       //trigger a repaint
