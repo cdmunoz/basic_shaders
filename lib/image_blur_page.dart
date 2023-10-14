@@ -20,27 +20,12 @@ class _ImageBlurPageState extends State<ImageBlurPage> {
   FragmentShader? shader;
   ui.Image? image;
 
-  void loadMyShader() async {
-    final imageData = await rootBundle.load(Assets.forest);
-    image = await decodeImageFromList(imageData.buffer.asUint8List());
-
-    var program = await FragmentProgram.fromAsset('shaders/image_blur.frag');
-    shader = program.fragmentShader();
-    setState(() {
-      // trigger a repaint
-    });
-
-    timer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
-      setState(() {
-        delta += 1 / 60;
-      });
-    });
-  }
-
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadShader();
+    });
     super.initState();
-    loadMyShader();
   }
 
   @override
@@ -51,23 +36,45 @@ class _ImageBlurPageState extends State<ImageBlurPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      extendBodyBehindAppBar: true,
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: _body(),
+      ),
+    );
+  }
+
+  Widget _body() {
     if (shader == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-        ),
-        extendBodyBehindAppBar: true,
-        body: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: CustomPaint(
-            painter: ImagePainter(shader!, [delta], [image]),
-          ),
-        ),
-      );
+      return CustomPaint(painter: ImagePainter(shader!, [delta], [image]));
     }
+  }
+
+  Future<void> _loadShader() async {
+    final imageData = await rootBundle.load(Assets.forest);
+    image = await decodeImageFromList(imageData.buffer.asUint8List());
+
+    final program = await FragmentProgram.fromAsset(Assets.imageBlur);
+    shader = program.fragmentShader();
+    setState(() {
+      //trigger a repaint
+    });
+
+    timer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
+      if (!mounted) return;
+      setState(() {
+        delta += 1 / 60;
+      });
+    });
   }
 }
