@@ -30,66 +30,100 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final style = textTheme.headlineSmall?.copyWith(color: Colors.deepPurple);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Some Shaders'),
+        backgroundColor: Colors.purple.shade50,
       ),
+      backgroundColor: Colors.purple.shade50,
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Center(
-          child: SingleChildScrollView(
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _navigateToGeneral(context, Assets.artFractal);
-                    },
-                    child: const Text('Art Fractal'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _navigateToImage(
-                        context,
-                        Assets.imageBlur,
-                        Assets.forest,
-                      );
-                    },
-                    child: const Text('Image Drop Blur'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _navigateToGeneral(context, Assets.lsdEffect);
-                    },
-                    child: const Text('LSD Effect'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _navigateToGeneral(context, Assets.mandelbrotDistance);
-                    },
-                    child: const Text('Mandelbrot Distance'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _navigateToGeneral(context, Assets.theClouds);
-                    },
-                    child: const Text('The Clouds'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _navigateToGeneral(context, Assets.scorpionTail);
-                    },
-                    child: const Text('Scorpion Tail'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _navigateToGeneral(context, Assets.waterRipple);
-                    },
-                    child: const Text('Water Ripple'),
-                  ),
-                ],
-              )
-            ]),
+          child: GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 1,
+            padding: const EdgeInsets.all(12),
+            mainAxisSpacing: 4,
+            crossAxisSpacing: 4,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  _navigateToGeneral(context, Assets.artFractal);
+                },
+                child: Text(
+                  'Art Fractal',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _navigateToImage(
+                    context,
+                    Assets.imageBlur,
+                    Assets.forest,
+                  );
+                },
+                child: Text(
+                  'Image Drop Blur',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _navigateToGeneral(context, Assets.lsdEffect);
+                },
+                child: Text(
+                  'LSD Effect',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _navigateToGeneral(context, Assets.mandelbrotDistance);
+                },
+                child: Text(
+                  'Mandelbrot Distance',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _navigateToGeneral(context, Assets.theClouds);
+                },
+                child: Text(
+                  'The Clouds',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _navigateToGeneral(context, Assets.scorpionTail);
+                },
+                child: Text(
+                  'Scorpion Tail',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _navigateToGeneral(context, Assets.waterRipple);
+                },
+                child: Text(
+                  'Water Ripple',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
           ),
         ),
       ),
