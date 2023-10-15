@@ -65,9 +65,21 @@ class HomePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      _navigateToGeneral(context, Assets.mandelbrotDistance);
+                    },
+                    child: const Text('Mandelbrot Distance'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
                       _navigateToGeneral(context, Assets.theClouds);
                     },
                     child: const Text('The Clouds'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _navigateToGeneral(context, Assets.scorpionTail);
+                    },
+                    child: const Text('Scorpion Tail'),
                   ),
                   ElevatedButton(
                     onPressed: () {
