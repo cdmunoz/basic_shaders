@@ -30,9 +30,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final style = textTheme.headlineSmall?.copyWith(color: Colors.deepPurple);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Some Shaders'),
@@ -48,114 +45,53 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             mainAxisSpacing: 4,
             crossAxisSpacing: 4,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  _navigateToGeneral(context, Assets.artFractal);
-                },
-                child: Text(
-                  'Art Fractal',
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
+            children: const [
+              ShaderPage(shaderPath: Assets.artFractal),
+              ShaderPage(
+                shaderPath: Assets.imageBlur,
+                imagePath: Assets.forest,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _navigateToImage(
-                    context,
-                    Assets.imageBlur,
-                    Assets.forest,
-                  );
-                },
-                child: Text(
-                  'Image Drop Blur',
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _navigateToGeneral(context, Assets.lsdEffect);
-                },
-                child: Text(
-                  'LSD Effect',
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _navigateToGeneral(context, Assets.mandelbrotDistance);
-                },
-                child: Text(
-                  'Mandelbrot Distance',
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _navigateToGeneral(context, Assets.theClouds);
-                },
-                child: Text(
-                  'The Clouds',
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _navigateToGeneral(context, Assets.scorpionTail);
-                },
-                child: Text(
-                  'Scorpion Tail',
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _navigateToGeneral(context, Assets.waterRipple);
-                },
-                child: Text(
-                  'Water Ripple',
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-              ),
+              ShaderPage(shaderPath: Assets.lsdEffect),
+              ShaderPage(shaderPath: Assets.mandelbrotDistance),
+              ShaderPage(shaderPath: Assets.theClouds),
+              ShaderPage(shaderPath: Assets.scorpionTail),
+              ShaderPage(shaderPath: Assets.waterRipple),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  void _navigateToGeneral(BuildContext context, String shaderPath) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return GeneralShaderPage(shaderPath: shaderPath);
-        },
-      ),
-    );
-  }
+class ShaderPage extends StatelessWidget {
+  const ShaderPage({
+    required this.shaderPath,
+    this.imagePath,
+    super.key,
+  });
 
-  void _navigateToImage(
-    BuildContext context,
-    String shaderPath,
-    String imagePath,
-  ) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return ImageShaderPage(
-            shaderPath: shaderPath,
-            imagePath: imagePath,
-          );
-        },
-      ),
+  final String shaderPath;
+  final String? imagePath;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget page = imagePath == null
+        ? GeneralShaderPage(shaderPath: shaderPath)
+        : ImageShaderPage(shaderPath: shaderPath, imagePath: imagePath!);
+
+    void handleOnShaderTap() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => page,
+        ),
+      );
+    }
+
+    return InkWell(
+      onTap: handleOnShaderTap,
+      child: ClipOval(child: page),
     );
   }
 }
