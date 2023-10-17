@@ -1,16 +1,15 @@
-# basic_shaders
+# Basic Custom Shaders
 
-A new Flutter project.
+A Flutter project that shows how to work with basic custom shaders. The custom shaders are taken from [ShaderToy](https://www.shadertoy.com/) 
+community and have been adapted to be used in a Flutter app.
 
-## Getting Started
+[This article](https://cdmunoz.medium.com/custom-shaders-en-flutter-para-divertirse-un-rato-af131e9089c5) supports this repository and explains how it's implemented.
 
-This project is a starting point for a Flutter application.
+Feel free to star the repo or contribute with new custom shaders that use new variables such as mouse clicks or 
+movements.
 
-A few resources to get you started if this is your first Flutter project:
+|       |                       |
+| ----------- |----------------------------------|
+| <img src="images/shaders_1.gif"> | <img src="images/shaders_2.gif"> |
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ 
