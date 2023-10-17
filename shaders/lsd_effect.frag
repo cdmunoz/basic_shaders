@@ -17,7 +17,7 @@ void main(void) {
 
     float dist = length(center);
     float p = (atan(center.y, center.x)) / (2.0 * PI);
-    float numStripes = 12.0;
+    float numStripes = 18.0;
 
     bool stripeA = mod(floor((p * numStripes) + (sin(dist * 10.0 + sin(iTime)))), 2.0) == 1.0;
     bool stripeB = mod(floor((p * numStripes) - (sin(dist * 10.0 + cos(iTime)))), 2.0) == 1.0;
@@ -26,20 +26,20 @@ void main(void) {
 
     if (stripeA && stripeB)
     {
-        col = vec3(0.4);
+        col = vec3(0.6);
     }
     else if (!stripeA && stripeB)
     {
-        col = vec3(0.5, 0.2, 0.1);
+        col = vec3(0.25, 0.4, 0.2);
     }
     else if (stripeA && !stripeB)
     {
-        col = vec3(0.3, 0.2, 0.1);
+        col = vec3(0.6, 0.4, 0.2);
     }
     else
     {
-        col = vec3(0.7);
+        col = vec3(0.9);
     }
 
-    fragColor = vec4(col, 1.0);
+    fragColor = vec4(col, 0.5);
 }
