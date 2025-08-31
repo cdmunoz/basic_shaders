@@ -2,6 +2,8 @@
 
 uniform vec2 uSize;
 uniform float iTime;
+uniform float u_zoom;
+uniform float u_wave_freq;
 vec2 iResolution;
 
 out vec4 fragColor;
@@ -25,13 +27,13 @@ void main() {
     vec3 finalColor = vec3(0.0);
 
     for (float i = 0.0; i < 4.0; i++) {
-        uv = fract(uv * 1.5) - 0.5;
+        uv = fract(uv * u_zoom) - 0.5;
 
         float d = length(uv) * exp(-length(uv0));
 
         vec3 col = palette(length(uv0) + i * .4 + iTime * .4);
 
-        d = sin(d * 8. + iTime) / 8.;
+        d = sin(d * u_wave_freq + iTime) / u_wave_freq;
         d = abs(d);
 
         d = pow(0.01 / d, 1.2);

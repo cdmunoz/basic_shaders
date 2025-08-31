@@ -1,6 +1,9 @@
 import 'package:basic_shaders/config/assets.dart';
+import 'package:basic_shaders/config/shader_config.dart';
+import 'package:basic_shaders/dynamic_shader/dynamic_shader_page.dart';
 import 'package:basic_shaders/general_shader/general_shader_page.dart';
 import 'package:basic_shaders/image_shader/image_shader_page.dart';
+import 'package:basic_shaders/shared/shader_preview.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -76,9 +79,17 @@ class ShaderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget page = imagePath == null
-        ? GeneralShaderPage(shaderPath: shaderPath)
-        : ImageShaderPage(shaderPath: shaderPath, imagePath: imagePath!);
+    Widget page;
+    if (shaderParameters.containsKey(shaderPath)) {
+      page = DynamicShaderPage(
+        shaderPath: shaderPath,
+        parameters: shaderParameters[shaderPath]!,
+      );
+    } else if (imagePath == null) {
+      page = GeneralShaderPage(shaderPath: shaderPath);
+    } else {
+      page = ImageShaderPage(shaderPath: shaderPath, imagePath: imagePath!);
+    }
 
     void handleOnShaderTap() {
       Navigator.push(
@@ -89,9 +100,13 @@ class ShaderPage extends StatelessWidget {
       );
     }
 
-    return InkWell(
-      onTap: handleOnShaderTap,
-      child: ClipOval(child: page),
+    return Material(
+      shape: const CircleBorder(),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: handleOnShaderTap,
+        child: ShaderPreview(shaderPath: shaderPath, imagePath: imagePath),
+      ),
     );
   }
 }
