@@ -1,0 +1,2 @@
+/Users/cdmunoz/FlutterDev/basic_shaders/android/app/.cxx/Debug/723q724g/x86_64/CMakeFiles/edit_cache.dir
+/Users/cdmunoz/FlutterDev/basic_shaders/android/app/.cxx/Debug/723q724g/x86_64/CMakeFiles/rebuild_cache.dir
