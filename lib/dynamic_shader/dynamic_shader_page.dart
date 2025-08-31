@@ -93,7 +93,8 @@ class _DynamicShaderPageState extends State<DynamicShaderPage> {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('${param.name}: ${value.toStringAsFixed(2)}', style: const TextStyle(color: Colors.white)),
+          Text('${param.name}: ${value.toStringAsFixed(2)}',
+              style: const TextStyle(color: Colors.white)),
           Slider(
             value: value,
             min: param.minValue,

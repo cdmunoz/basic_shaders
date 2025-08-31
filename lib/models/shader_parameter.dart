@@ -1,4 +1,3 @@
-
 class ShaderParameter {
   final String name;
   final double initialValue;

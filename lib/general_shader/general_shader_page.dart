@@ -5,9 +5,14 @@ import 'package:basic_shaders/general_shader/general_painter.dart';
 import 'package:flutter/material.dart';
 
 class GeneralShaderPage extends StatefulWidget {
-  const GeneralShaderPage({super.key, required this.shaderPath});
+  const GeneralShaderPage({
+    super.key,
+    required this.shaderPath,
+    this.parameters,
+  });
 
   final String shaderPath;
+  final List<double>? parameters;
 
   @override
   State<GeneralShaderPage> createState() => _GeneralShaderPageState();
@@ -20,10 +25,10 @@ class _GeneralShaderPageState extends State<GeneralShaderPage> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadShader();
     });
-    super.initState();
   }
 
   @override
@@ -57,7 +62,9 @@ class _GeneralShaderPageState extends State<GeneralShaderPage> {
     if (shader == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
-      return CustomPaint(painter: GeneralPainter(shader!, delta));
+      return CustomPaint(
+          painter:
+              GeneralPainter(shader!, delta, parameters: widget.parameters));
     }
   }
 
@@ -69,6 +76,7 @@ class _GeneralShaderPageState extends State<GeneralShaderPage> {
     });
 
     timer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
+      if (!mounted) return;
       setState(() {
         delta += 1 / 60;
       });

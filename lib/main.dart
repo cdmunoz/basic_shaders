@@ -3,7 +3,6 @@ import 'package:basic_shaders/config/shader_config.dart';
 import 'package:basic_shaders/dynamic_shader/dynamic_shader_page.dart';
 import 'package:basic_shaders/general_shader/general_shader_page.dart';
 import 'package:basic_shaders/image_shader/image_shader_page.dart';
-import 'package:basic_shaders/shared/shader_preview.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -79,23 +77,37 @@ class ShaderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget page;
-    if (shaderParameters.containsKey(shaderPath)) {
-      page = DynamicShaderPage(
+    Widget previewWidget;
+    Widget detailPage;
+
+    final dynamicParams = shaderParameters[shaderPath];
+
+    if (dynamicParams != null) {
+      // This is a dynamic shader
+      detailPage = DynamicShaderPage(
         shaderPath: shaderPath,
-        parameters: shaderParameters[shaderPath]!,
+        parameters: dynamicParams,
+      );
+      previewWidget = GeneralShaderPage(
+        shaderPath: shaderPath,
+        parameters: dynamicParams.map((p) => p.initialValue).toList(),
       );
     } else if (imagePath == null) {
-      page = GeneralShaderPage(shaderPath: shaderPath);
+      // This is a standard general shader
+      detailPage = GeneralShaderPage(shaderPath: shaderPath);
+      previewWidget = detailPage;
     } else {
-      page = ImageShaderPage(shaderPath: shaderPath, imagePath: imagePath!);
+      // This is a standard image shader
+      detailPage =
+          ImageShaderPage(shaderPath: shaderPath, imagePath: imagePath!);
+      previewWidget = detailPage;
     }
 
     void handleOnShaderTap() {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => page,
+          builder: (context) => detailPage,
         ),
       );
     }
@@ -105,7 +117,7 @@ class ShaderPage extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: handleOnShaderTap,
-        child: ShaderPreview(shaderPath: shaderPath, imagePath: imagePath),
+        child: previewWidget,
       ),
     );
   }
