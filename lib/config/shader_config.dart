@@ -19,21 +19,21 @@ final shaderParameters = {
   Assets.imageBlur: [
     ShaderParameter(
       name: 'Pixelation',
-      initialValue: 10.0,
-      minValue: 1.0,
-      maxValue: 50.0,
+      initialValue: 32.0,
+      minValue: 4.0,
+      maxValue: 128.0,
     ),
     ShaderParameter(
       name: 'Wave Frequency',
       initialValue: 50.0,
       minValue: 5.0,
-      maxValue: 100.0,
+      maxValue: 150.0,
     ),
     ShaderParameter(
       name: 'Wave Amplitude',
       initialValue: 0.06,
       minValue: 0.0,
-      maxValue: 0.2,
+      maxValue: 0.3,
     ),
   ],
 };
