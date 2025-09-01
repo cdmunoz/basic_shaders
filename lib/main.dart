@@ -1,5 +1,6 @@
 import 'package:basic_shaders/config/assets.dart';
 import 'package:basic_shaders/config/shader_config.dart';
+import 'package:basic_shaders/dynamic_shader/dynamic_image_shader_page.dart';
 import 'package:basic_shaders/dynamic_shader/dynamic_shader_page.dart';
 import 'package:basic_shaders/general_shader/general_shader_page.dart';
 import 'package:basic_shaders/image_shader/image_shader_page.dart';
@@ -84,14 +85,29 @@ class ShaderPage extends StatelessWidget {
 
     if (dynamicParams != null) {
       // This is a dynamic shader
-      detailPage = DynamicShaderPage(
-        shaderPath: shaderPath,
-        parameters: dynamicParams,
-      );
-      previewWidget = GeneralShaderPage(
-        shaderPath: shaderPath,
-        parameters: dynamicParams.map((p) => p.initialValue).toList(),
-      );
+      if (imagePath != null) {
+        // Dynamic image shader
+        detailPage = DynamicImageShaderPage(
+          shaderPath: shaderPath,
+          parameters: dynamicParams,
+          imagePath: imagePath!,
+        );
+        previewWidget = ImageShaderPage(
+          shaderPath: shaderPath,
+          imagePath: imagePath!,
+          parameters: dynamicParams.map((p) => p.initialValue).toList(),
+        );
+      } else {
+        // Dynamic general shader
+        detailPage = DynamicShaderPage(
+          shaderPath: shaderPath,
+          parameters: dynamicParams,
+        );
+        previewWidget = GeneralShaderPage(
+          shaderPath: shaderPath,
+          parameters: dynamicParams.map((p) => p.initialValue).toList(),
+        );
+      }
     } else if (imagePath == null) {
       // This is a standard general shader
       detailPage = GeneralShaderPage(shaderPath: shaderPath);
