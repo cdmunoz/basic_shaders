@@ -64,4 +64,30 @@ final shaderParameters = {
       maxValue: 1.0,
     ),
   ],
+  Assets.theClouds: [
+    ShaderParameter(
+      name: 'Cloud Scale',
+      initialValue: 1.1,
+      minValue: 0.5,
+      maxValue: 5.0,
+    ),
+    ShaderParameter(
+      name: 'Cloud Cover',
+      initialValue: 0.2,
+      minValue: -1.0,
+      maxValue: 1.0,
+    ),
+    ShaderParameter(
+      name: 'Cloud Dark',
+      initialValue: 0.5,
+      minValue: 0.0,
+      maxValue: 1.0,
+    ),
+    ShaderParameter(
+      name: 'Cloud Light',
+      initialValue: 0.3,
+      minValue: 0.0,
+      maxValue: 1.0,
+    ),
+  ],
 };
