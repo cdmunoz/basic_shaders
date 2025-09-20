@@ -110,4 +110,24 @@ final shaderParameters = {
       maxValue: 2.05,
     ),
   ],
+  Assets.dwarfStar: [
+    ShaderParameter(
+      name: 'Frequency',
+      initialValue: 10.0,
+      minValue: 5.0,
+      maxValue: 50.0,
+    ),
+    ShaderParameter(
+      name: 'Speed',
+      initialValue: 1.0,
+      minValue: 0.1,
+      maxValue: 5.0,
+    ),
+    ShaderParameter(
+      name: 'Amplitude',
+      initialValue: 0.03,
+      minValue: 0.0,
+      maxValue: 0.1,
+    ),
+  ],
 };
