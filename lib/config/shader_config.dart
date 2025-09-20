@@ -36,4 +36,18 @@ final shaderParameters = {
       maxValue: 0.3,
     ),
   ],
+  Assets.lsdEffect: [
+    ShaderParameter(
+      name: 'Stripes',
+      initialValue: 18,
+      minValue: 2,
+      maxValue: 50,
+    ),
+    ShaderParameter(
+      name: 'Distortion',
+      initialValue: 10,
+      minValue: 1,
+      maxValue: 30,
+    ),
+  ],
 };

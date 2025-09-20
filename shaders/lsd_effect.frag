@@ -8,6 +8,9 @@ out vec4 fragColor;
 
 #define PI 3.1415926535897932384626433832795
 
+uniform float u_num_stripes;
+uniform float u_dist_freq;
+
 void main(void) {
 
     iResolution = uSize;
@@ -17,10 +20,9 @@ void main(void) {
 
     float dist = length(center);
     float p = (atan(center.y, center.x)) / (2.0 * PI);
-    float numStripes = 18.0;
 
-    bool stripeA = mod(floor((p * numStripes) + (sin(dist * 10.0 + sin(iTime)))), 2.0) == 1.0;
-    bool stripeB = mod(floor((p * numStripes) - (sin(dist * 10.0 + cos(iTime)))), 2.0) == 1.0;
+    bool stripeA = mod(floor((p * u_num_stripes) + (sin(dist * u_dist_freq + sin(iTime)))), 2.0) == 1.0;
+    bool stripeB = mod(floor((p * u_num_stripes) - (sin(dist * u_dist_freq + cos(iTime)))), 2.0) == 1.0;
 
     vec3 col;
 
