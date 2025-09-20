@@ -58,6 +58,7 @@ class HomePage extends StatelessWidget {
               ShaderPage(shaderPath: Assets.theClouds),
               ShaderPage(shaderPath: Assets.scorpionTail),
               ShaderPage(shaderPath: Assets.waterRipple),
+              ShaderPage(shaderPath: Assets.dwarfStar),
             ],
           ),
         ),
