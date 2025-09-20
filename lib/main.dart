@@ -49,16 +49,16 @@ class HomePage extends StatelessWidget {
             crossAxisSpacing: 4,
             children: const [
               ShaderPage(shaderPath: Assets.artFractal),
+              ShaderPage(shaderPath: Assets.dwarfStar),
               ShaderPage(
                 shaderPath: Assets.imageBlur,
                 imagePath: Assets.forest,
               ),
               ShaderPage(shaderPath: Assets.lsdEffect),
               ShaderPage(shaderPath: Assets.mandelbrotDistance),
-              ShaderPage(shaderPath: Assets.theClouds),
               ShaderPage(shaderPath: Assets.scorpionTail),
+              ShaderPage(shaderPath: Assets.theClouds),
               ShaderPage(shaderPath: Assets.waterRipple),
-              ShaderPage(shaderPath: Assets.dwarfStar),
             ],
           ),
         ),
