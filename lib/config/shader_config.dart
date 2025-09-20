@@ -90,4 +90,24 @@ final shaderParameters = {
       maxValue: 1.0,
     ),
   ],
+  Assets.scorpionTail: [
+    ShaderParameter(
+      name: 'Box Size',
+      initialValue: 1.0,
+      minValue: 0.5,
+      maxValue: 2.0,
+    ),
+    ShaderParameter(
+      name: 'Quality (Iterations)',
+      initialValue: 150,
+      minValue: 50,
+      maxValue: 300,
+    ),
+    ShaderParameter(
+      name: 'Shape Param',
+      initialValue: 1.95,
+      minValue: 1.85,
+      maxValue: 2.05,
+    ),
+  ],
 };

@@ -5,11 +5,14 @@ out vec4 fragColor;
 uniform vec2 uSize;
 uniform float iTime;
 
+// Dynamic parameters - MUST match order in shader_config.dart
+uniform float u_box_size;      // loc 3
+uniform float u_iterations;    // loc 4
+uniform float u_shape_param;   // loc 5
+
 //by Jos Leys
 vec3 background1Color = vec3(1.0, 1.0, 1.0);
 vec3 color3 = vec3(0.2, 0.0, 0.6);
-
-float box_size_x = 1.;
 
 float wrap(float x, float a, float s) {
     x -= s;
@@ -33,14 +36,14 @@ float JosKleinian(vec2 z)
     float a = KleinR;
     float b = KleinI;
     float f = sign(b) * 1.;
-    for (int i = 0; i < 150; i++)
+    for (int i = 0; i < int(u_iterations); i++)
     {
         z.x = z.x + f * b / a * z.y;
-        z.x = wrap(z.x, 2. * box_size_x, -box_size_x);
+        z.x = wrap(z.x, 2. * u_box_size, -u_box_size);
         z.x = z.x - f * b / a * z.y;
 
         //If above the separation line, rotate by 180° about (-b/2, a/2)
-        if (z.y >= a * 0.5 + f * (2. * a - 1.95) / 4. * sign(z.x + b * 0.5) * (1. - exp(-(7.2 - (1.95 - a) * 15.) * abs(z.x + b * 0.5))))
+        if (z.y >= a * 0.5 + f * (2. * a - u_shape_param) / 4. * sign(z.x + b * 0.5) * (1. - exp(-(7.2 - (u_shape_param - a) * 15.) * abs(z.x + b * 0.5))))
         {z = vec2(-b, a) - z;}
 
         //Apply transformation a
