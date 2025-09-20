@@ -50,4 +50,18 @@ final shaderParameters = {
       maxValue: 30,
     ),
   ],
+  Assets.mandelbrotDistance: [
+    ShaderParameter(
+      name: 'Color Factor',
+      initialValue: 4.0,
+      minValue: 0.0,
+      maxValue: 20.0,
+    ),
+    ShaderParameter(
+      name: 'Color Exponent',
+      initialValue: 0.2,
+      minValue: 0.1,
+      maxValue: 1.0,
+    ),
+  ],
 };

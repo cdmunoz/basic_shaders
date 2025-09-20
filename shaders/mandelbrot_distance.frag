@@ -42,6 +42,8 @@ float distanceToMandelbrot(in vec2 c)
 out vec4 fragColor;
 uniform vec2 uSize;
 uniform float iTime;
+uniform float u_color_factor;
+uniform float u_color_exponent;
 
 void main()
 {
@@ -58,7 +60,7 @@ void main()
     float d = distanceToMandelbrot(c);
 
     // do some soft coloring based on distance
-    d = clamp(pow(4.0 * d / zoo, 0.2), 0.0, 1.0);
+    d = clamp(pow(u_color_factor * d / zoo, u_color_exponent), 0.0, 1.0);
 
     vec3 col = vec3(d);
 
