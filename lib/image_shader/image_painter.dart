@@ -14,7 +14,9 @@ class ImagePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < images.length; i++) {
-      shader.setImageSampler(i, images[i]!);
+      if (images[i] != null) {
+        shader.setImageSampler(i, images[i]!);
+      }
     }
     shader.setFloat(0, size.width);
     shader.setFloat(1, size.height);

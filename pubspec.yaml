@@ -61,6 +61,7 @@ flutter:
     - shaders/mandelbrot_distance.frag
     - shaders/the_clouds.frag
     - shaders/scorpion_tail.frag
+    - shaders/dwarf_star.frag
     - shaders/water_ripple.frag
 
   uses-material-design: true

@@ -11,10 +11,14 @@ class ImageShaderPage extends StatefulWidget {
     super.key,
     required this.shaderPath,
     required this.imagePath,
+    // Optional parameters for shaders that have dynamic values.
+    // Used for the preview of dynamic shaders.
+    this.parameters,
   });
 
   final String shaderPath;
   final String imagePath;
+  final List<double>? parameters;
 
   @override
   State<ImageShaderPage> createState() => _ImageShaderPageState();
@@ -28,10 +32,10 @@ class _ImageShaderPageState extends State<ImageShaderPage> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadShader();
     });
-    super.initState();
   }
 
   @override
@@ -65,7 +69,9 @@ class _ImageShaderPageState extends State<ImageShaderPage> {
     if (shader == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
-      return CustomPaint(painter: ImagePainter(shader!, [delta], [image]));
+      // Combine time (delta) and any other dynamic parameters into one list for the painter.
+      final uniforms = [delta, ...?widget.parameters];
+      return CustomPaint(painter: ImagePainter(shader!, uniforms, [image]));
     }
   }
 

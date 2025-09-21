@@ -4,15 +4,17 @@
 
 uniform vec2 uSize;
 uniform float iTime;
-vec2 iResolution;
 
+// Dynamic parameters - MUST match order in shader_config.dart
+uniform float u_cloud_scale;   // loc 3
+uniform float u_cloud_cover;   // loc 4
+uniform float u_cloud_dark;    // loc 5
+uniform float u_cloud_light;   // loc 6
+
+vec2 iResolution;
 out vec4 fragColor;
 
-const float cloudscale = 1.1;
 const float speed = 0.03;
-const float clouddark = 0.5;
-const float cloudlight = 0.3;
-const float cloudcover = 0.2;
 const float cloudalpha = 8.0;
 const float skytint = 0.5;
 const vec3 skycolour1 = vec3(0.2, 0.4, 0.6);
@@ -43,7 +45,8 @@ float noise(in vec2 p) {
 // fbm -----------------------------------------------
 float fbm(vec2 n) {
     float total = 0.0, amplitude = 0.1;
-    for (int i = 0; i < 7; i++) {
+    // Optimization: Reduced loop iterations from 7 to 4 for performance.
+    for (int i = 0; i < 4; i++) {
         total += noise(n) * amplitude;
         n = m * n;
         amplitude *= 0.4;
@@ -59,14 +62,15 @@ void main(void) {
     vec2 p = fragCoord.xy / iResolution.xy;
     vec2 uv = p * vec2(iResolution.x / iResolution.y, 1.0);
     float time = iTime * speed;
-    float q = fbm(uv * cloudscale * 0.5);
+    float q = fbm(uv * u_cloud_scale * 0.5);
 
     //ridged noise shape
     float r = 0.0;
-    uv *= cloudscale;
+    uv *= u_cloud_scale;
     uv -= q - time;
     float weight = 0.8;
-    for (int i = 0; i < 8; i++) {
+    // Optimization: Reduced loop iterations from 8 to 5 for performance.
+    for (int i = 0; i < 5; i++) {
         r += abs(weight * noise(uv));
         uv = m * uv + time;
         weight *= 0.7;
@@ -75,10 +79,11 @@ void main(void) {
     //noise shape
     float f = 0.0;
     uv = p * vec2(iResolution.x / iResolution.y, 1.0);
-    uv *= cloudscale;
+    uv *= u_cloud_scale;
     uv -= q - time;
     weight = 0.7;
-    for (int i = 0; i < 8; i++) {
+    // Optimization: Reduced loop iterations from 8 to 5 for performance.
+    for (int i = 0; i < 5; i++) {
         f += weight * noise(uv);
         uv = m * uv + time;
         weight *= 0.6;
@@ -90,10 +95,11 @@ void main(void) {
     float c = 0.0;
     time = iTime * speed * 2.0;
     uv = p * vec2(iResolution.x / iResolution.y, 1.0);
-    uv *= cloudscale * 2.0;
+    uv *= u_cloud_scale * 2.0;
     uv -= q - time;
     weight = 0.4;
-    for (int i = 0; i < 7; i++) {
+    // Optimization: Reduced loop iterations from 7 to 4 for performance.
+    for (int i = 0; i < 4; i++) {
         c += weight * noise(uv);
         uv = m * uv + time;
         weight *= 0.6;
@@ -103,10 +109,11 @@ void main(void) {
     float c1 = 0.0;
     time = iTime * speed * 3.0;
     uv = p * vec2(iResolution.x / iResolution.y, 1.0);
-    uv *= cloudscale * 3.0;
+    uv *= u_cloud_scale * 3.0;
     uv -= q - time;
     weight = 0.4;
-    for (int i = 0; i < 7; i++) {
+    // Optimization: Reduced loop iterations from 7 to 4 for performance.
+    for (int i = 0; i < 4; i++) {
         c1 += abs(weight * noise(uv));
         uv = m * uv + time;
         weight *= 0.6;
@@ -115,9 +122,9 @@ void main(void) {
     c += c1;
 
     vec3 skycolour = mix(skycolour2, skycolour1, p.y);
-    vec3 cloudcolour = vec3(1.1, 1.1, 0.9) * clamp((clouddark + cloudlight * c), 0.0, 1.0);
+    vec3 cloudcolour = vec3(1.1, 1.1, 0.9) * clamp((u_cloud_dark + u_cloud_light * c), 0.0, 1.0);
 
-    f = cloudcover + cloudalpha * f * r;
+    f = u_cloud_cover + cloudalpha * f * r;
 
     vec3 result = mix(skycolour, clamp(skytint * skycolour + cloudcolour, 0.0, 1.0), clamp(f + c, 0.0, 1.0));
 
