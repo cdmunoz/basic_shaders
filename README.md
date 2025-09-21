@@ -8,8 +8,8 @@ community and have been adapted to be used in a Flutter app.
 Feel free to star the repo or contribute with new custom shaders that use new variables such as mouse clicks or 
 movements.
 
-|       |                       |
-| ----------- |----------------------------------|
-| <img src="images/shaders_1.gif"> | <img src="images/shaders_2.gif"> |
+|                                  |                                  |
+|----------------------------------|----------------------------------|
+| <img src="images/shaders_3.gif"> | <img src="images/shaders_4.gif"> |
 
  
